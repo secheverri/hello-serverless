@@ -15,20 +15,15 @@ pool:
 stages:
 - stage: ContinousIntegration
   jobs:
-  - job: UnitTest
+  - job: ContinousIntegration
     steps:
     - task: NodeTool@0
       inputs:
         versionSpec: '14.x'
       displayName: 'Install Node.js'
     - script: pwd; ls -al; node -v; npm -v; npm install; npm run test:coverage
-  - job: StaticAnalysis
-    dependsOn: UnitTest
-    steps:
+      displayName: UnitTest
     - script: npm install eslint --save-dev; npm run lint
-  - job: PackageDeploy
-    dependsOn: StaticAnalysis
-    steps:
-    - script: node -v; npm -v; npm install -g serverless
-    - script: sls config credentials --provider aws --key $(awsID) --secret $(awsSecret)
-    - script: sls deploy
+      displayName: StaticAnalysis
+    - script: node -v; npm -v; npm install -g serverless; sls config credentials --provider aws --key $(awsID) --secret $(awsSecret); sls deploy
+      displayName: Package&Deploy
