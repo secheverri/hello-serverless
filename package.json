@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint": "eslint . --ext .js",
-    "test:coverage": "jest --coverage --collectCoverageFrom=api/** lint"
+    "test:coverage": "jest --coverage --collectCoverageFrom=api/**"
   },
   "author": "",
   "license": "ISC"
