@@ -11,9 +11,12 @@
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^6.1.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^8.2.0"
+  },
   "scripts": {
-    "test:coverage": "jest --coverage --collectCoverageFrom=api/**"
+    "lint": "eslint . --ext .js",
+    "test:coverage": "jest --coverage --collectCoverageFrom=api/** lint"
   },
   "author": "",
   "license": "ISC"
