@@ -25,7 +25,7 @@ stages:
   - job: StaticAnalysis
     dependsOn: UnitTest
     steps:
-    - script: npm install eslint --save-dev; npm run lint
+    - script: npm run lint
   - job: PackageDeploy
     dependsOn: StaticAnalysis
     steps:

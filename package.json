@@ -15,7 +15,7 @@
     "eslint": "^8.2.0"
   },
   "scripts": {
-    "lint": "eslint . --ext .js",
+    "lint": "./node_modules/.bin/eslint . --ext .js",
     "test:coverage": "jest --coverage --collectCoverageFrom=api/**"
   },
   "author": "",
