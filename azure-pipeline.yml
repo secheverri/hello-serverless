@@ -25,7 +25,7 @@ stages:
   - job: StaticAnalysis
     steps:
     - script: npm run lint
-  - job: Package-Deploy
+  - job: PackageDeploy
     steps:
     - script: node -v; npm -v; npm install; npm install -g serverless
     - script: sls config credentials --provider aws --key $(awsID) --secret $(awsSecret)
