@@ -21,7 +21,7 @@ stages:
       inputs:
         versionSpec: '14.x'
       displayName: 'Install Node.js'
-    - script: node -v; npm -v; npm install; npm run test:coverage
+    - script: pwd; ls -al; node -v; npm -v; npm install; npm run test:coverage
   - job: StaticAnalysis
     dependsOn: UnitTest
     steps:
@@ -29,6 +29,6 @@ stages:
   - job: PackageDeploy
     dependsOn: StaticAnalysis
     steps:
-    - script: node -v; npm -v; npm install; npm install -g serverless
+    - script: node -v; npm -v; npm install -g serverless
     - script: sls config credentials --provider aws --key $(awsID) --secret $(awsSecret)
     - script: sls deploy
