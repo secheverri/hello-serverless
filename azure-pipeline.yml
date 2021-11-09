@@ -1,0 +1,32 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+variables:
+- group: serverless
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: ContinousIntegration
+  jobs:
+  - job: UnitTest
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '14.x'
+      displayName: 'Install Node.js'
+    - script: node -v; npm -v; npm install; npm run test:coverage
+  - job: StaticAnalysis
+    steps:
+    - script: npm run lint
+  - job: Package-Deploy
+    steps:
+    - script: node -v; npm -v; npm install; npm install -g serverless
+    - script: sls config credentials --provider aws --key $(awsID) --secret $(awsSecret)
+    - script: sls deploy
