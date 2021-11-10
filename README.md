@@ -3,10 +3,9 @@
 
 # hello-serverless
 This is an example project where we show a complete example creating, testing and deploying an AWS Lambda using Serverless Framework, NodeJS, Jest, AWS-SDK, AWS-Mock, Codecov and github actions.
-For a complete guide please follow this [Medium post](https://medium.com/devco-tech-blog/how-i-developed-tested-and-automatically-deployed-an-aws-lambda-for-the-first-time).
 
 This Lambda exposes 2 endpoints through the AWS Api Gateway. The first gets an item from a DynamoDB table and the second one updates an item from the same table.
-An example set of unit tests is provided and besodes, the configuration to deploy the lambda locally and test it against a local DynamoDB instance.
+An example set of unit tests is provided and besides, the configuration to deploy the lambda locally and test it against a local DynamoDB instance.
 
 ## Commands:
 
@@ -22,19 +21,33 @@ An example set of unit tests is provided and besodes, the configuration to deplo
   >sls dynamodb start --migrate
 ````  
 
-Inside the dynamo-commands.txt file there are some example queries to populate the database.
+## CI/CD:
 
-To execute both functions follow this example commands:
+The following is the pipeline to run the whole CI/CD process (UnitTest, StaticAnalysis, Package and Deploy)
+
+https://dev.azure.com/secheverris/Tests/_build?definitionId=12
+
+The following are the commands to run each step:
+
+UnitTest: 
+
 ````
-serverless invoke local --function seek --data "{\"body\":\"{\\\"itemID\\\": \\\"1\\\"}\"}"
-serverless invoke local --function buy --data "{\"body\":\"{\\\"itemID\\\": \\\”1\\\”, \\\"itemCount\\\”: \\\"1\\\"}\”}”
+npm run test:coverage
 ````
 
-## How I can help?
-Review the issues, we hear new ideas.
+StaticAnalysis: 
 
-## Don't know hwo we are? 
-Please visit www.devco.com.co
+````
+npm run lint
+````
 
+Package and Deploy serverless: 
 
-# Team Devco.
+````
+sls deploy
+````
+**Before to deploy the serverless, you have to set the AWS credentials, you can set it with the following command:
+````
+sls config credentials --provider aws --key <key> --secret <secret>
+````
+
