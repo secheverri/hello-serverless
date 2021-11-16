@@ -21,11 +21,23 @@ stages:
       inputs:
         versionSpec: '14.x'
       displayName: 'Install Node.js'
-    - script: pwd; ls -al; node -v; npm -v; npm install; npm run test:coverage
+    - script: |
+        node -v
+        npm -v
+        npm install
+        npm run test:coverage
       displayName: UnitTest
-    - script: npm install eslint --save-dev; npm run lint
+    - script: |
+        npm install eslint --save-dev
+        npm run lint
       displayName: StaticAnalysis
-    - script: node -v; npm -v; npm install -g serverless; sls config credentials --provider aws --key $(awsID) --secret $(awsSecret); sls package
+    - script: |
+        node -v
+        npm -v
+        npm install -g serverless
+        sls config credentials --provider aws --key $(awsID) --secret $(awsSecret)
+        sls package
+        ls -al .serverless
       displayName: Package
     - script: sls deploy
       displayName: Deploy
