@@ -25,5 +25,7 @@ stages:
       displayName: UnitTest
     - script: npm install eslint --save-dev; npm run lint
       displayName: StaticAnalysis
-    - script: node -v; npm -v; npm install -g serverless; sls config credentials --provider aws --key $(awsID) --secret $(awsSecret); sls deploy
-      displayName: Package&Deploy
+    - script: node -v; npm -v; npm install -g serverless; sls config credentials --provider aws --key $(awsID) --secret $(awsSecret); sls package
+      displayName: Package
+    - script: sls deploy
+      displayName: Deploy
