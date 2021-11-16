@@ -50,4 +50,6 @@ sls deploy
 ````
 sls config credentials --provider aws --key <key> --secret <secret>
 ````
+In this case, as we use Azure Devops, we use the Library to store the AWS ID, and the AWS Secret was stored hidden:
 
+![Library](images/Library.png).
